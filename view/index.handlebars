@@ -1,0 +1,17 @@
+<style>
+    .grid{
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
+<main>
+    <nav>
+        Bytete Stream
+    </nav>
+    <div class="grid">
+        {{#each folders}}
+            <a class="link" href="/{{this}}">{{this}}</a>
+        {{/each}}
+    </div>
+</main>

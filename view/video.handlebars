@@ -1,0 +1,30 @@
+<div>{{videoFolder}} / </div>
+<style>
+    video{
+        width: 50%;
+    }
+    ul{
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+<video src="/stream/bean/{{files.[0]}}" controls autoplay></video>
+<ul>
+    {{#each files}}
+        <a class="link" href="/stream/{{../videoFolder}}/{{this}}" onclick="play(this, event)">{{this}}</a>
+    {{/each}}
+</ul>
+
+<a href="/">home</a>
+
+
+<script>
+    const video = document.querySelector('video');
+    function play(ele, event){
+        event.preventDefault();
+        console.log(ele, event);
+        video.src = ele.href;
+        video.play();
+    }
+</script>
+
