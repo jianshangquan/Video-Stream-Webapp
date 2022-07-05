@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const {engine} = require('express-handlebars');
+const https = require('https')
 const utils = require('./utils');
 
 const app = express();
@@ -54,6 +55,14 @@ app.get('/stream/*', (req, res) => {
 })
 
 
-app.listen(8880, (e) => {
-    console.log('Server start listen on port 8880')
-})
+// app.listen(8880, (e) => {
+//     console.log('Server start listen on port 8880')
+// })
+
+
+const privateKey = fs.readFileSync(path.join(__dirname, '../', 'ssl', 'private.pem'));
+const certificate = fs.readFileSync(path.join(__dirname, '../', 'ssl', 'certificate.pem'));
+https.createServer({
+    key: privateKey,
+    cert: certificate
+}, app).listen(2096)

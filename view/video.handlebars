@@ -1,4 +1,3 @@
-<div>{{videoFolder}} / </div>
 <style>
     video{
         width: 50%;
@@ -7,13 +6,63 @@
         display: flex;
         flex-direction: column;
     }
+
+    main{
+        display: flex;
+        padding: 3rem;
+    }
+
+    .video-name{
+        padding: 0rem 3rem;
+    }
+
+    ul{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    ul a{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        transition: 0.3s;
+    }
+
+    ul a:hover{
+        background-color: var(--primary-background-color);
+    }
+
+    .episode-list{
+        padding: 1rem;
+        width: 100%;
+    }
+
+    .playing{
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    .playing::after{
+        content: 'currently playing...';
+        float: right;
+        font-size: 0.5rem;
+        color: grey;
+    }
 </style>
-<video src="/stream/bean/{{files.[0]}}" controls autoplay></video>
-<ul>
-    {{#each files}}
-        <a class="link" href="/stream/{{../videoFolder}}/{{this}}" onclick="play(this, event)">{{this}}</a>
-    {{/each}}
-</ul>
+<div class="video-name">Currently opening "{{videoFolder}}" / </div>
+<main>
+    <video src="/stream/bean/{{files.[0]}}" controls autoplay></video>
+    <div class="episode-list">
+        <div>List of episode</div>
+        <ul>
+            {{#each files}}
+                <a class="link" href="/stream/{{../videoFolder}}/{{this}}" onclick="play(this, event)">{{this}}</a>
+            {{/each}}
+        </ul>
+    </div>
+</main>
 
 <a href="/">home</a>
 
@@ -25,6 +74,8 @@
         console.log(ele, event);
         video.src = ele.href;
         video.play();
+        ele.classList.add('playing');
+        console.log(ele);
     }
 </script>
 

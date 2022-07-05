@@ -1,15 +1,27 @@
 <style>
-    .grid{
+    .video-list{
         display: flex;
         flex-direction: column;
+    }
+    
+    .video-list a{
+        padding: 1rem;
+        transition: 0.2s;
+        text-decoration: none;
+    }
+
+    .video-list a::before{
+        content: '> ';
+    }
+
+    .video-list a:hover{
+        background-color: var(--primary-background-color);
     }
 </style>
 
 <main>
-    <nav>
-        Byteflex
-    </nav>
-    <div class="grid">
+    
+    <div class="video-list">
         {{#each folders}}
             <a class="link" href="/{{this}}">{{this}}</a>
         {{/each}}
